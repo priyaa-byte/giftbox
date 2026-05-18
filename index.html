@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+body{
+margin:0;
+overflow:hidden;
+font-family:sans-serif;
+}
+
+/* background video */
+
+#bgvideo{
+position:fixed;
+right:0;
+bottom:0;
+min-width:100%;
+min-height:100%;
+object-fit:cover;
+z-index:-1;
+}
+
+/* center container */
+
+.container{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
+}
+
+/* box */
+
+#box{
+width:420px;
+border-radius:50px;
+cursor:pointer;
+}
+
+/* surprise wrapper (curve maintain karega) */
+
+.surpriseBox{
+width:420px;
+border-radius:50px;
+overflow:hidden;
+display:none;
+box-shadow:0 0 25px black;
+}
+
+/* surprise video */
+
+#surprise{
+width:100%;
+display:block;
+border-radius:50px;
+}
+
+/* buttons */
+
+button{
+margin:10px;
+font-size: 20px;
+padding:10px 25px;
+background:green;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- background video -->
+
+<video autoplay muted loop id="bgvideo">
+<source src="background.mp4" type="video/mp4">
+</video>
+
+<!-- music -->
+
+<audio id="music" src="sound.mp3" loop></audio>
+
+<div class="container">
+
+<img src="box.jpg" id="box">
+
+<div class="surpriseBox" id="surpriseBox">
+<video id="surprise" loop>
+<source src="video.mp4" type="video/mp4">
+</video>
+</div>
+
+<br><br>
+
+<button onclick="openBox()">Open</button>
+<button onclick="closeBox()">Close</button>
+
+</div>
+
+<script>
+
+function openBox(){
+
+document.getElementById("box").style.display="none";
+document.getElementById("surpriseBox").style.display="block";
+
+document.getElementById("music").play();
+document.getElementById("surprise").play();
+
+}
+
+function closeBox(){
+
+document.getElementById("box").style.display="block";
+document.getElementById("surpriseBox").style.display="none";
+
+let music=document.getElementById("music");
+music.pause();
+music.currentTime=0;
+
+let video=document.getElementById("surprise");
+video.pause();
+video.currentTime=0;
+
+}
+
+</script>
+
+</body>
+
+</html>
